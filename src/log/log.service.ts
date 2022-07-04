@@ -2,21 +2,19 @@ import { Injectable} from '@nestjs/common';
 import { Log } from '../../entities/log';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-
+import { DeepPartial } from 'typeorm';
 @Injectable()
 export class LogService {
   constructor(
     @InjectRepository(Log)
-    public log: Repository<Log>,
+    private log: Repository<Log>,
   ) { }
 
 
 
-  async create() {
-
-    // const log = this.log.create(data);
-    // await this.log.save(data);
-    return "hi"
+  async create(data:DeepPartial<Log>) {
+    const log = this.log.create(data);
+    await this.log.save(data);
   }
 
   

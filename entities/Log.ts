@@ -11,7 +11,7 @@ export class Log {
   @Column("varchar", { name: "file", length: 150 })
   file: string;
 
-  @Column("varchar", { name: "extra", length: 1000 })
+  @Column("text", { name: "extra" })
   extra: string;
 
   @Column("varchar", { name: "error", length: 500 })

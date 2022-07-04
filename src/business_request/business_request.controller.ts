@@ -36,13 +36,21 @@ export class BusinessRequestController {
     const user = await this.businessRequestService.create(data).catch(async (err: Error) => {
       
       // let dataLog = {
-      //   loginId: 1,
+      //   loginId:1,
       //   file: 'business_request-createBusinessRequest',
       //   extra: err.stack.toString(),
       //   error: err.message.toString(),
       // }
+      // var login_id=1;
     
-      await this.logService.create();
+      const dataLog= {
+        loginId: 1,
+        file: 'business_request-createBusinessRequest',
+        extra: err.stack.toString(),
+        error: err.message.toString(),
+      };
+    
+      await this.logService.create(dataLog);
 
       throw new HttpException({
         statusCode: HttpStatus.BAD_REQUEST,

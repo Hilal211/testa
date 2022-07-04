@@ -6,8 +6,8 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Activity } from "./Activity";
 import { Brand } from "./Brand";
+import { Activity } from "./Activity";
 
 @Index("FK_brand_02", ["brandId"], {})
 @Index("FK_activity_02", ["activityId"], {})
@@ -65,17 +65,17 @@ export class Store {
   })
   archived: number;
 
-  @ManyToOne(() => Activity, (activity) => activity.stores, {
-    onDelete: "SET NULL",
-    onUpdate: "SET NULL",
-  })
-  @JoinColumn([{ name: "activity_id", referencedColumnName: "id" }])
-  activity: Activity;
-
   @ManyToOne(() => Brand, (brand) => brand.stores, {
     onDelete: "SET NULL",
     onUpdate: "SET NULL",
   })
   @JoinColumn([{ name: "brand_id", referencedColumnName: "id" }])
   brand: Brand;
+
+  @ManyToOne(() => Activity, (activity) => activity.stores, {
+    onDelete: "SET NULL",
+    onUpdate: "SET NULL",
+  })
+  @JoinColumn([{ name: "activity_id", referencedColumnName: "id" }])
+  activity: Activity;
 }
